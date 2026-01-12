@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovations | Heritage-Tech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS for Innovations Page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #d4af37;
+            --secondary-color: #00843d;
+            --accent-color: #e31b23;
+            --dark-color: #1a1a1a;
+            --light-color: #f5f5f5;
+            --text-color: #333;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #eee;
+        }
+
+        /* Content Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Innovation Categories */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 0.8rem 2rem;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .category-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .category-tab:hover:not(.active) {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        /* Innovation Cards */
+        .innovations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .innovation-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .innovation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .innovation-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .innovation-content {
+            padding: 1.5rem;
+        }
+
+        .innovation-category {
+            display: inline-block;
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .innovation-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .innovation-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background-color: var(--light-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--dark-color);
+        }
+
+        .innovation-region {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Tech Spotlight */
+        .tech-spotlight {
+            background-color: var(--light-color);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                z-index: 99;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .innovations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-tab {
+                width: 80%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-ankh"></i>
+                <span>Heritage-Tech</span>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="innovations.html" class="active">Innovations</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Heritage-Tech Innovations</h1>
+            <p>Discover how African innovators are applying technology to traditional knowledge to create unique intellectual property.</p>
+        </div>
+    </section>
+
+    <!-- Innovation Categories -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Innovations</h2>
+                <p>Cutting-edge solutions that blend tradition with technology</p>
+            </div>
+            
+            <div class="category-tabs">
+                <div class="category-tab active" data-category="all">All Innovations</div>
+                <div class="category-tab" data-category="ai">AI & Machine Learning</div>
+                <div class="category-tab" data-category="blockchain">Blockchain</div>
+                <div class="category-tab" data-category="iot">IoT & Sensors</div>
+                <div class="category-tab" data-category="vr">VR & AR</div>
+            </div>
+
+            <div class="innovations-grid">
+                <!-- Innovation 1 -->
+                <div class="innovation-card" data-category="ai">
+                    <img src="https://images.unsplash.com/photo-1559131397-f94da358a4f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80" alt="Digital Storytelling" class="innovation-img">
+                    <div class="innovation-content">
+                        <span class="innovation-category">AI & Machine Learning</span>
+                        <h3>Digital Storytelling Platform</h3>
+                        <p>An AI-powered platform that preserves oral traditions and folktales from across Africa, using natural language processing to translate and adapt stories for global audiences while maintaining cultural authenticity.</p>
+                        <div class="innovation-tech">
+                            <span class="tech-tag">AI</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Cloud Computing</span>
+                        </div>
+                        <div class="innovation-region">Region: Pan-African</div>
+                    </div>
+                </div>
+
+                <!-- Innovation 2 -->
+                <div class="innovation-card" data-category="blockchain">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1365&q=80" alt="Art Provenance" class="innovation-img">
+                    <div class="innovation-content">
+                        <span class="innovation-category">Blockchain</span>
+                        <h3>Blockchain for Art Provenance</h3>
+                        <p>A blockchain-based system that tracks the provenance of African art and crafts, ensuring artists receive fair compensation and buyers get authenticated products with verifiable origins.</p>
+                        <div class="innovation-tech">
+                            <span class="tech-tag">Blockchain</span>
+                            <span class="tech-tag">Smart Contracts</span>
+                            <span class="tech-tag">Digital Identity</span>
+                        </div>
+                        <div class="innovation-region">Region: West Africa</div>
+                    </div>
+                </div>
+
+                <!-- Innovation 3 -->
+                <div class="innovation-card" data-category="ai">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" alt="Medicinal Database" class="innovation-img">
+                    <div class="innovation-content">
+                        <span class="innovation-category">AI & Machine Learning</span>
+                        <h3>Medicinal Plant Database</h3>
+                        <p>A comprehensive digital database of African medicinal plants and traditional healing practices, combined with modern pharmacological research to develop new medicines while protecting indigenous knowledge.</p>
+                        <div class="innovation-tech">
+                            <span class="tech-tag">Database</span>
+                            <span class="tech-tag">Data Analytics</span>
+                            <span class="tech-tag">Machine Learning</span>
+                        </div>
+                        <div class="innovation-region">Region: Southern & East Africa</div>
+                    </div>
+                </div>
+
+                <!-- Innovation 4 -->
+                <div class="innovation-card" data-category="iot">
+                    <img src="https://images.unsplash.com/photo-1591117207239-788bf8f52c0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80" alt="Smart Agriculture" class="innovation-img">
+                    <div class="innovation-content">
+                        <span class="innovation-category">IoT & Sensors</span>
+                        <h3>Smart Traditional Agriculture</h3>
+                        <p>IoT sensors combined with indigenous agricultural knowledge to create smart farming systems that preserve traditional practices while optimizing yield and sustainability.</p>
+                        <div class="innovation-tech">
+                            <span class="tech-tag">IoT</span>
+                            <span class="tech-tag">Sensors</span>
+                            <span class="tech-tag">Data Analytics</span>
+                        </div>
+                        <div class="innovation-region">Region: East Africa</div>
+                    </div>
+                </div>
+
+                <!-- Innovation 5 -->
+                <div class="innovation-card" data-category="vr">
+                    <img src="https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-4.0.3&auto=format&fit=crop&w=1380&q=80" alt="VR Experience" class="innovation-img">
+                    <div class="innovation-content">
+                        <span class="innovation-category">VR & AR</span>
+                        <h3>VR Cultural Experiences</h3>
+                        <p>Immersive VR experiences that allow users to participate in traditional ceremonies, visit historical sites, and interact with cultural artifacts in a fully immersive digital environment.</p>
+                        <div class="innovation-tech">
+                            <span class="tech-tag">VR</span>
+                            <span class="tech-tag">3D Modeling</span>
+                            <span class="tech-tag">Immersive Tech</span>
+                        </div>
+                        <div class="innovation-region">Region: Pan-African</div>
+                    </div>
+                </div>
+
+                <!-- Innovation 6 -->
+                <div class="innovation-card" data-category="blockchain">
+                    <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Textile Design" class="innovation-img">
+                    <div class="innovation-content">
+                        <span class="innovation-category">Blockchain</span>
+                        <h3>Digital Textile Design Platform</h3>
+                        <p>A blockchain-based platform that digitizes traditional textile patterns, allowing designers to license authentic designs while ensuring original creators receive royalties through smart contracts.</p>
+                        <div class="innovation-tech">
+                            <span class="tech-tag">Blockchain</span>
+                            <span class="tech-tag">Digital Design</span>
+                            <span class="tech-tag">Smart Contracts</span>
+                        </div>
+                        <div class="innovation-region">Region: West Africa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Spotlight -->
+    <section class="tech-spotlight">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technology Spotlight</h2>
+                <p>Key technologies powering heritage-tech innovations</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Machine learning algorithms analyze and preserve traditional knowledge patterns, language, and cultural expressions.</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Blockchain</h3>
+                    <p>Securely tracks provenance, protects intellectual property, and ensures fair compensation through smart contracts.</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3>VR & AR</h3>
+                    <p>Creates immersive experiences that preserve and share cultural heritage in engaging, interactive formats.</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <h3>IoT & Sensors</h3>
+                    <p>Monitors and preserves traditional practices while collecting data for optimization and sustainability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Heritage-Tech</h3>
+                    <p>Applying technology to traditional knowledge to create unique African intellectual property.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="innovations.html">Innovations</a></li>
+                        <li><a href="impact.html">Impact</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Accra, Ghana</li>
+                        <li><i class="fas fa-phone"></i> +233 24 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> info@heritage-tech.africa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Heritage-Tech. All rights reserved. | Empowering African innovation through tradition and technology.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Category tabs functionality
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const innovationCards = document.querySelectorAll('.innovation-card');
+        
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const category = tab.getAttribute('data-category');
+                
+                // Filter innovation cards
+                innovationCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
